@@ -46,10 +46,7 @@ class Getthinkgeek extends Controller {
 			$title = $image_and_title[4];
 			
 			if ($this->shirt->included($url) == false)
-			{
-				$shirt_info['url'] = $url;
-				$shirt_info['title'] = $title;
-				
+			{				
 				$small_shirt_image = file_get_contents($img);
 				
 				$big_image = $img;
@@ -59,7 +56,13 @@ class Getthinkgeek extends Controller {
 				file_put_contents($small_image_directory.$image_name,$small_shirt_image);
 				file_put_contents($large_image_directory.$image_name,$big_shirt_image);
 				
-				$shirt_info['img'] = $image_name;
+				$shirt_info['url'] = $url;
+				$shirt_info['title'] = $title;
+				$shirt_info['image'] = $image_name;
+				$shirt_info['ratio'] = 50;
+				$shirt_info['company'] = 'thinkgeek';
+				$shirt_info['enabled'] = true;
+				
 				$this->shirt->insert($shirt_info);
 			}
 		}
