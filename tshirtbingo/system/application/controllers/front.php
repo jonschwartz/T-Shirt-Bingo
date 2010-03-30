@@ -13,5 +13,9 @@ class Front extends Controller {
 		$this->load->view('card');
 		$this->load->view('footer');
 	}
+	
+	function card($card_id)
+	{
+	}
 }
 ?>
