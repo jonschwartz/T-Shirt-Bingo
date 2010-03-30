@@ -1,52 +1,3 @@
-<?php
-// Grab images and links
-//	by Jon Schwartz
-//		3/29/2010
-
-$unisex_tshirts = file_get_contents('http://www.thinkgeek.com/tshirts-apparel/unisex/feature/desc/0/all');
-
-//http://www.thinkgeek.com/images/products/front/tqualizer_anim.gif
-//http://www.thinkgeek.com/images/products/thumb/largesquare/tqualizer_anim.gif
-
-$product_block_split = explode('<!-- BEGIN PRODUCTS -->	',$unisex_tshirts);
-$product_block_rough = $product_block_split[1];
-
-$product_block_split = explode('<!-- END PRODUCT GRID --> ',$product_block_rough);
-$product_block = $product_block_split[0];
-
-$url_parts = explode('/',$_SERVER['PHP_SELF']);
-
-if (in_array('big',$url_parts))
-{
-$product_block = str_replace('/images/products/thumb/largesquare/','http://www.thinkgeek.com/images/products/front/',$product_block);
-}
-else
-{
-$product_block = str_replace('/images/products/thumb/largesquare/','http://www.thinkgeek.com/images/products/thumb/largesquare/',$product_block);
-}
-
-$product_block = str_replace('/tshirts-apparel/','http://www.thinkgeek.com/tshirts-apparel/',$product_block);
-
-$shirts = explode('<div class="product">', $product_block);
-
-array_shift($shirts);
-
-
-?>
-<html>
-<head>
-<title>T-Shirt Bingo</title>
-<style type="text/css">
-@page {
-  size: Letter portrait;
-}
-</style>
-<LINK href="style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<center>
-<div class="header"><nobr><img src="shirt.png" alt="t-shirt bingo"/><br/><span>T-Shirt Bingo</span></nobr></div>
-<br/>
 <table style="border:1px solid black;" class="card box_round box_shadow">
 <tr><th>S</th><th></th><th>H</th><th></th><th>I</th><th></th><th>R</th><th></th><th>T</th></tr>
 <tr><td colspan="9"><hr width="95%"/></td></tr>
@@ -121,8 +72,3 @@ for($count = 0; $count <= 24; $count++)
 <tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>
 </table>
 </div>
-<hr width= "80%"/>
-&copy; 2010 T-Shirt Bingo.  All rights reserved.  Shirt designs are &copy; their rights holders.  For more information, please see shirt site.
-</center>
-</body>
-</html>
