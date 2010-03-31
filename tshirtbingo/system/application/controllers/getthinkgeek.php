@@ -10,8 +10,8 @@ class Getthinkgeek extends Controller {
 	function index()
 	{
 	
-		$large_image_directory = '/public_html/tshirtbingo/shirts/large/';
-		$small_image_directory = '/public_html/tshirtbingo/shirts/small/';
+		$large_image_directory = '/home/jonandje/public_html/tshirtbingo/shirts/large/';
+		$small_image_directory = '/home/jonandje/public_html/tshirtbingo/shirts/small/';
 	
 		$unisex_tshirts = file_get_contents('http://www.thinkgeek.com/tshirts-apparel/unisex/feature/desc/0/all');
 
@@ -41,7 +41,7 @@ class Getthinkgeek extends Controller {
 			$img = $image_and_title[0];
 			
 			$url_parts = explode('/',$img);
-			$image_name = $url_parts[-1];
+			$image_name = end($url_parts);
 			
 			$title = $image_and_title[4];
 			
@@ -51,10 +51,10 @@ class Getthinkgeek extends Controller {
 				
 				$big_image = $img;
 				$big_image = str_replace('/images/products/thumb/largesquare/','/images/products/front/',$big_image);
-				$big_shirt_image = file_get_contents($big_img);
+				$big_shirt_image = file_get_contents($big_image);
 				
-				file_put_contents($small_image_directory.$image_name,$small_shirt_image);
-				file_put_contents($large_image_directory.$image_name,$big_shirt_image);
+				file_put_contents($small_image_directory.$image_name,$small_shirt_image,FILE_BINARY);
+				file_put_contents($large_image_directory.$image_name,$big_shirt_image,FILE_BINARY);
 				
 				$shirt_info['url'] = $url;
 				$shirt_info['title'] = $title;
@@ -66,6 +66,7 @@ class Getthinkgeek extends Controller {
 				$this->shirt->insert($shirt_info);
 			}
 		}
+		$this->load->view('header');
 	}
 }
 ?>

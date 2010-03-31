@@ -12,7 +12,7 @@ class Shirt extends Model {
 		// true/false whether or not the shirt is already in the database
 		
 		$query = $this->db->get_where('shirts', array('url' => $url));
-		if ($this->db->count_all_results() >= 1)
+		if ($query->num_rows() > 0)
 		{
 			return true;
 		}
@@ -26,6 +26,42 @@ class Shirt extends Model {
 		// the shirts table
 		
 		$this->db->insert('shirts', $shirt_info); 
+	}
+	
+	function get_url($shirt_id)
+	{
+		$query = $this->db->get_where('shirts', array('shirt_id' => $shirt_id));
+		foreach ($query->result() as $row)
+		{
+			return $row->url;
+		}
+	}
+	
+	function get_title($shirt_id)
+	{
+		$query = $this->db->get_where('shirts', array('shirt_id' => $shirt_id));
+		foreach ($query->result() as $row)
+		{
+			return $row->title;
+		}
+	}
+	
+	function get_image($shirt_id)
+	{
+		$query = $this->db->get_where('shirts', array('shirt_id' => $shirt_id));
+		foreach ($query->result() as $row)
+		{
+			return $row->image;
+		}
+	}
+	
+	function get_enabled($shirt_id)
+	{
+		$query = $this->db->get_where('shirts', array('shirt_id' => $shirt_id));
+		foreach ($query->result() as $row)
+		{
+			return $row->enabled;
+		}
 	}
 }
 ?>
