@@ -282,7 +282,7 @@ $config['global_xss_filtering'] = true;
 | by the output class.  Do not "echo" any values with compression enabled.
 |
 */
-$config['compress_output'] = true;
+$config['compress_output'] = false;
 
 /*
 |--------------------------------------------------------------------------

@@ -108,7 +108,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('shirt');
+$autoload['model'] = array('shirt','card');
 
 
 

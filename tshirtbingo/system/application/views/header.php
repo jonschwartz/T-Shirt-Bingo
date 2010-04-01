@@ -6,9 +6,9 @@
   size: Letter portrait;
 }
 </style>
-<LINK href="style.css" rel="stylesheet" type="text/css">
+<LINK href="http://www.tshirtbingo.com/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <center>
-<div class="header"><nobr><img src="shirt.png" alt="t-shirt bingo"/><br/><span>T-Shirt Bingo</span></nobr></div>
+<div class="header"><nobr><img src="http://www.tshirtbingo.com/shirt.png" alt="t-shirt bingo"/><br/><span>T-Shirt Bingo</span></nobr></div>
 <br/>
