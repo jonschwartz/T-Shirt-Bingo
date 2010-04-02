@@ -83,6 +83,7 @@ class Card extends Model {
 	
 	function show_card($card_id,$big)
 	{
+		
 		$card_data = '<table style="border:1px solid black;" class="card box_round box_shadow">'."\n".'<tr><th>S</th><th></th><th>H</th><th></th><th>I</th><th></th><th>R</th><th></th><th>T</th></tr>'."\n".'<tr><td colspan="9"><hr width="95%"/></td></tr>'."\n".'';
 		
 		if ($big != "")
@@ -107,9 +108,24 @@ class Card extends Model {
 			
 			$shirt_ids = explode(',',$shirts);
 			
+			$card_data .= $shirt_ids;
+			
 			for($count = 0; $count <= 24; $count++)
 			{
-				$image_url = $image_base_url.$this->shirt->get_image($shirt_ids[$count]);
+				
+				$shirt_id = $shirt_ids[$count];
+				
+				$shirt_detail_query = $this->db->get_where('shirts', array('shirt_id' => $shirt_id));
+				$card_data .= 'shirt_id '.$shirt_id."\n";
+				//$card_data .= var_dump($shirt_detail_query);
+				foreach ($shirt_detail_query->result() as $shirt_detail_row)
+				{
+					$image_url = $image_base_url.$shirt_detail_row->image;
+					$title = $shirt_detail_row->title;
+					$url = $shirt_detail_row->url;
+				}
+				
+				
 				if ($col_count == 0)
 				{
 					$card_data .= '<tr>';
@@ -120,7 +136,7 @@ class Card extends Model {
 				}
 				else
 				{
-					$card_data .='<td><center><a href="'.$this->shirt->get_url($shirt_ids[$count]).'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$this->shirt->get_title($shirt_ids[$count]).'</a></center></td>'."\n";
+					$card_data .='<td><center><a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$title.'</a></center></td>'."\n";
 				}
 				if ($col_count < 4)
 				{
