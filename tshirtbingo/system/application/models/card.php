@@ -21,6 +21,9 @@ class Card extends Model {
 			foreach ($query->result() as $row)
 			{
 				array_push($shirts, $row->shirt_id);
+				
+				// Update, set shirt ratio down 1 if it would end up being > 0
+				
 			}
 			
 			$rand_shirts = array_rand($shirts, 25);
@@ -53,12 +56,13 @@ class Card extends Model {
 			$rand_shirts = array_rand($shirts, 25);
 		}
 		
-		$shirt_string = $rand_shirts[0];
+		$shirt_string = $shirts[$rand_shirts[0]];
 		array_shift($rand_shirts);
 		
 		foreach ($rand_shirts as $shirt)
 		{
-			$shirt_string .= ','.$shirt;
+			
+			$shirt_string .= ','.$shirts[$shirt];
 		}
 		
 		$this->db->flush_cache();
@@ -108,16 +112,13 @@ class Card extends Model {
 			
 			$shirt_ids = explode(',',$shirts);
 			
-			$card_data .= $shirt_ids;
-			
 			for($count = 0; $count <= 24; $count++)
 			{
 				
 				$shirt_id = $shirt_ids[$count];
 				
 				$shirt_detail_query = $this->db->get_where('shirts', array('shirt_id' => $shirt_id));
-				$card_data .= 'shirt_id '.$shirt_id."\n";
-				//$card_data .= var_dump($shirt_detail_query);
+				
 				foreach ($shirt_detail_query->result() as $shirt_detail_row)
 				{
 					$image_url = $image_base_url.$shirt_detail_row->image;
@@ -136,11 +137,11 @@ class Card extends Model {
 				}
 				else
 				{
-					$card_data .='<td><center><a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$title.'</a></center></td>'."\n";
+					$card_data .='<td><center><a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$title.'</a><br/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="noprint"/></center></td>'."\n";
 				}
 				if ($col_count < 4)
 				{
-					$card_data .= '<td><span style="border-right: solid 1px black;"><br/><br/><br/><br/></span></td>'."\n";
+					$card_data .= '<td><span style="border-right: solid 1px black; height:200px;"><br/><br/><br/><br/></span></td>'."\n";
 				}
 				if ($col_count == 4)
 				{
@@ -155,8 +156,13 @@ class Card extends Model {
 			}
 		}
 		
-		$card_data .= '</table>'."\n".'<br/>'."\n".'<table>'."\n".'<tr><td><a href="http://www.tshirtbingo.com/index.php/card/'.$card_id.'/big">Bigger Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/easy">Easier Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/medium">Medium Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/medium">Harder Shirt Images</a></td></tr>'."\n".'</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
+		$card_data .= '</table>'."\n".'<br/>'."\n".'<table>'."\n".'<tr><td><a href="http://www.tshirtbingo.com/index.php/front/card/'.$card_id.'/big">Bigger Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/front/easy">Easier Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/front/medium">Medium Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/front/hard">Harder Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/index.php/front/card/'.$card_id.'/">Get this Card Again</a></td></tr>'."\n".'</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
 		return ($card_data);
+	}
+	
+	function saw($card_id, $shirt_id)
+	{
+		// add card_id and shirt_id to saw table, allows it to be crossed off on board
 	}
 }
 ?>

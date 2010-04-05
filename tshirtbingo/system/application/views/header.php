@@ -6,7 +6,8 @@
   size: Letter portrait;
 }
 </style>
-<LINK href="http://www.tshirtbingo.com/style.css" rel="stylesheet" type="text/css">
+<LINK href="http://www.tshirtbingo.com/style.css" rel="stylesheet" type="text/css" media="screen">
+<link href="http://www.tshirtbingo.com/print.css" rel="stylesheet" type="text/css" media="print"> 
 </head>
 <body>
 <center>
