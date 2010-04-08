@@ -99,18 +99,23 @@ class Card extends Model {
 			$image_base_url = 'http://tshirtbingo.com/shirts/small/';
 		}
 		
-		$this->db->select('shirts');
+		$this->db->select('shirts','checked');
 		$this->db->where('card_id', $card_id);
 		$query = $this->db->get('cards');
 		
 		$col_count = 0;
 		$row_count = 0;
 		
+		$checked = "";
+		
 		foreach ($query->result() as $row)
 		{
 			$shirts = $row->shirts;
+			$checked = $row->checked;
 			
 			$shirt_ids = explode(',',$shirts);
+			$checked_shirts = explode(',',$checked);
+			
 			
 			for($count = 0; $count <= 24; $count++)
 			{
@@ -137,7 +142,15 @@ class Card extends Model {
 				}
 				else
 				{
-					$card_data .='<td><center><a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$title.'</a><br/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="noprint"/></center></td>'."\n";
+					$card_data .='<td><center>';
+					foreach ($checked_shirts as $checked_shirt)
+					{
+						if ($checked_shirt == $shirt_id)
+						{
+							$card_data .= '<img src="http://www.tshirtbingo.com/checked.jpg" class ="checked"/>';
+						}
+					}
+					$card_data .='<a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$title.'</a><br/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="noprint"/></center></td>'."\n";
 				}
 				if ($col_count < 4)
 				{
@@ -160,9 +173,32 @@ class Card extends Model {
 		return ($card_data);
 	}
 	
-	function saw($card_id, $shirt_id)
+	function check($shirt_data)
 	{
 		// add card_id and shirt_id to saw table, allows it to be crossed off on board
+		
+		$query = $this->db->get_where('cards', array('card_id' => $card_id));
+		
+		foreach ($query->result() as $row)
+		{
+			$checked = $row->checked;
+		}
+		
+		if ($checked != "")
+		{
+			$checked .= ','.$shirt_data['shirt_id'];
+		}
+		else
+		{
+			$checked .= $shirt_data['shirt_id'];
+		}
+		
+		$shirt_update_data = array (
+			'checked' => $checked
+		);
+		
+		$this->db->where('card_id', $shirt_data['card_id']);
+		$this->db->update('cards',$shirt_update_data);
 	}
 }
 ?>

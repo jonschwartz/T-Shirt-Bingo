@@ -1,8 +1,8 @@
 <?php
 
-class Getthinkgeek extends Controller {
+class Getjinx extends Controller {
 
-	function Getthinkgeek()
+	function Getjinx()
 	{
 		parent::Controller();	
 	}
@@ -11,8 +11,7 @@ class Getthinkgeek extends Controller {
 	{
 	
 		$shirt_collection_urls = array(
-			'http://www.thinkgeek.com/tshirts-apparel/womens/feature/desc/0/all',
-			'http://www.thinkgeek.com/tshirts-apparel/unisex/feature/desc/0/all'
+			'http://www.jinx.com/men?&data=%26ps%3d20%26pn%3d1%26sort%3dselling%26tcid%3d1&ps=all'
 		);
 	
 		$large_image_directory = '/home/jonandje/public_html/tshirtbingo/shirts/large/';
@@ -25,17 +24,17 @@ class Getthinkgeek extends Controller {
 			//http://www.thinkgeek.com/images/products/front/tqualizer_anim.gif
 			//http://www.thinkgeek.com/images/products/thumb/largesquare/tqualizer_anim.gif
 
-			$product_block_split = explode('<!-- BEGIN PRODUCTS -->	',$unisex_tshirts);
+			$product_block_split = explode('<div class="listingProductGroup">',$unisex_tshirts);
 			$product_block_rough = $product_block_split[1];
 
-			$product_block_split = explode('<!-- END PRODUCT GRID --> ',$product_block_rough);
+			$product_block_split = explode('<div id="pagenav-footer">',$product_block_rough);
 			$product_block = $product_block_split[0];
 
-			$product_block = str_replace('/images/products/thumb/largesquare/','http://www.thinkgeek.com/images/products/thumb/largesquare/',$product_block);
+			$product_block = str_replace('/Content/Product/','http://www.jinx.com/Content/Product/',$product_block);
 			
-			$product_block = str_replace('/tshirts-apparel/','http://www.thinkgeek.com/tshirts-apparel/',$product_block);
+			//$product_block = str_replace('/tshirts-apparel/','http://www.thinkgeek.com/tshirts-apparel/',$product_block);
 
-			$shirts = explode('<div class="product">', $product_block);
+			$shirts = explode('<div class="product', $product_block);
 
 			array_shift($shirts);
 			
@@ -50,14 +49,25 @@ class Getthinkgeek extends Controller {
 				$url_parts = explode('/',$img);
 				$image_name = end($url_parts);
 				
-				$title = $image_and_title[4];
+				$image_name_parts = explode('_',$image_name);
+				
+				$big_image = $image_name_parts[0].'_'.$image_name_parts[1];
+				
+				if (stristr($image_name,'ZoomM')!=false)
+				{
+					$big_image .= '_ZoomB.jpg';
+				}
+				else
+				{
+					$big_image .= '_1B.jpg';
+				}
+				
+				$title = $image_and_title[3];
 				
 				if ($this->shirt->included($url) == false)
 				{				
 					$small_shirt_image = file_get_contents($img);
 					
-					$big_image = $img;
-					$big_image = str_replace('/images/products/thumb/largesquare/','/images/products/front/',$big_image);
 					$big_shirt_image = file_get_contents($big_image);
 					
 					file_put_contents($small_image_directory.$image_name,$small_shirt_image,FILE_BINARY);
@@ -67,7 +77,7 @@ class Getthinkgeek extends Controller {
 					$shirt_info['title'] = $title;
 					$shirt_info['image'] = $image_name;
 					$shirt_info['ratio'] = 50;
-					$shirt_info['company'] = 'thinkgeek';
+					$shirt_info['company'] = 'jinx';
 					$shirt_info['enabled'] = true;
 					
 					$this->shirt->insert($shirt_info);
