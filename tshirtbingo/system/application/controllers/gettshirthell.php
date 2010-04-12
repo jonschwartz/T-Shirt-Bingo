@@ -1,8 +1,8 @@
 <?php
 
-class Getwoot extends Controller {
+class Gettshirthell extends Controller {
 
-	function Getwoot()
+	function Gettshirthell()
 	{
 		parent::Controller();	
 	}
@@ -11,7 +11,7 @@ class Getwoot extends Controller {
 	{
 	
 		$shirt_collection_urls = array(
-			'http://shirtwhat.com/archive_s.php'
+			'http://www.tshirthell.com/hell.shtml'
 		);
 	
 		$large_image_directory = '/home/jonandje/public_html/tshirtbingo/shirts/large/';
@@ -24,13 +24,13 @@ class Getwoot extends Controller {
 			//http://www.thinkgeek.com/images/products/front/tqualizer_anim.gif
 			//http://www.thinkgeek.com/images/products/thumb/largesquare/tqualizer_anim.gif
 
-			$product_block_split = explode('<tr><td align="center">',$unisex_tshirts);
+			$product_block_split = explode('<div id="shirt_container"> ',$unisex_tshirts);
 			$product_block_rough = $product_block_split[1];
 
-			$product_block_split = explode('<div id="pagenav-footer">',$product_block_rough);
+			$product_block_split = explode('<div id="footer">',$product_block_rough);
 			$product_block = $product_block_split[0];
 
-			$product_block = str_replace('/Content/Product/','http://www.jinx.com/Content/Product/',$product_block);
+			$product_block = str_replace('/funny-shirts/','http://www.tshirthell.com/funny-shirts/',$product_block);
 			
 			//$product_block = str_replace('/tshirts-apparel/','http://www.thinkgeek.com/tshirts-apparel/',$product_block);
 
@@ -77,7 +77,7 @@ class Getwoot extends Controller {
 					$shirt_info['title'] = $title;
 					$shirt_info['image'] = $image_name;
 					$shirt_info['ratio'] = 50;
-					$shirt_info['company'] = 'woot';
+					$shirt_info['company'] = 'tshirthell';
 					$shirt_info['enabled'] = true;
 					
 					$this->shirt->insert($shirt_info);

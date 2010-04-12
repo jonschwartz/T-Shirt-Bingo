@@ -8,14 +8,30 @@ class Front extends Controller {
 	}
 	
 	function index()
-	{
-		$this->load->view('header');
-		$difficulty = 1;
-		$card_id = $this->card->generate_card($difficulty); // generates a random easy card
-		$card_data['card_data'] = $this->card->show_card($card_id,"");
-		$this->load->view('card', $card_data);
-		$this->load->view('footer');
-		//echo "hello";
+	{	
+		if (!(get_cookie('cardid')))
+		{
+			$difficulty = 1;
+			$card_id = $this->card->generate_card($difficulty); // generates a random easy card
+			
+			$cookie = array(
+					   'name'   => 'cardid',
+					   'value'  => $card_id,
+					   'expire' => '3888000',
+				   );
+
+			set_cookie($cookie);
+			
+			$card_data['card_data'] = $this->card->show_card($card_id,"");
+			$this->load->view('header');
+			$this->load->view('card', $card_data);
+			$this->load->view('footer');
+		}
+		else
+		{
+			redirect('/front/card/'.get_coookie('cardid'), 'refresh');
+		}
+		
 	}
 	
 	function card($card_id,$big='')
@@ -33,6 +49,14 @@ class Front extends Controller {
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
+		
+		$cookie = array(
+					   'name'   => 'cardid',
+					   'value'  => $card_id,
+					   'expire' => '3888000',
+				   );
+
+		set_cookie($cookie);
 	}
 	
 	function medium($big='')
@@ -42,6 +66,14 @@ class Front extends Controller {
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
+		
+		$cookie = array(
+					   'name'   => 'cardid',
+					   'value'  => $card_id,
+					   'expire' => '3888000',
+				   );
+
+		set_cookie($cookie);
 	}
 	
 	function hard($big='')
@@ -51,6 +83,14 @@ class Front extends Controller {
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
+		
+		$cookie = array(
+					   'name'   => 'cardid',
+					   'value'  => $card_id,
+					   'expire' => '3888000',
+				   );
+
+		set_cookie($cookie);
 	}
 	
 }

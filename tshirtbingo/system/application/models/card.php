@@ -99,7 +99,7 @@ class Card extends Model {
 			$image_base_url = 'http://tshirtbingo.com/shirts/small/';
 		}
 		
-		$this->db->select('shirts','checked');
+		//$this->db->select('shirts','checked');
 		$this->db->where('card_id', $card_id);
 		$query = $this->db->get('cards');
 		
