@@ -142,15 +142,57 @@ class Card extends Model {
 				}
 				else
 				{
-					$card_data .='<td><center>';
+					$shirt_is_checked = 0;
 					foreach ($checked_shirts as $checked_shirt)
 					{
 						if ($checked_shirt == $shirt_id)
 						{
-							$card_data .= '<img src="http://www.tshirtbingo.com/checked.jpg" class ="checked"/>';
+							$shirt_is_checked = 1;
 						}
 					}
-					$card_data .='<a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0/><br/>'.$title.'</a><br/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="noprint"/></center></td>'."\n";
+					$card_data .='<td><center><div class="shirt';
+					if ($shirt_is_checked == 1)
+					{
+						if ($big != "")
+						{
+							$card_data .= ' checked_div_big';
+						}
+						else
+						{
+							$card_data .= ' checked_div';
+						}
+					}
+					$card_data .= '">';
+					
+					$card_data .= '<div class="inner_shirt';
+					if ($shirt_is_checked == 1)
+					{
+						if ($big != "")
+						{
+							$card_data .= ' checked_inner_big';
+						}
+						else
+						{
+							$card_data .= ' checked_inner';
+						}
+					}
+					$card_data .= '">';
+					
+					if ($shirt_is_checked == 1)
+					{
+						$card_data .= '<img src="http://www.tshirtbingo.com/checked.png" class ="checked" width="150" height="150"/>';
+					}
+					$card_data .='<a href="'.$url.'" target="_new"><img src="'.$image_url.'" border=0';
+					if ($shirt_is_checked == 1)
+					{
+						$card_data .= ' class="checked_shirt" ';
+					}
+					$card_data .='/><br/>'.$title.'</a>';
+					if ($shirt_is_checked == 0)
+					{
+						$card_data .='<br/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="noprint"/>';
+					}
+					$card_data .='</center></div></div></td>'."\n";
 				}
 				if ($col_count < 4)
 				{
@@ -177,14 +219,14 @@ class Card extends Model {
 	{
 		// add card_id and shirt_id to saw table, allows it to be crossed off on board
 		
-		$query = $this->db->get_where('cards', array('card_id' => $card_id));
+		$query = $this->db->get_where('cards', array('card_id' => $shirt_data['card_id']));
 		
 		foreach ($query->result() as $row)
 		{
 			$checked = $row->checked;
 		}
 		
-		if ($checked != "")
+		if (($checked != "") and (isset($checked)))
 		{
 			$checked .= ','.$shirt_data['shirt_id'];
 		}

@@ -10,6 +10,7 @@ class Saw extends Controller {
 	function index()
 	{
 		//forward to main page
+		redirect('/front/', 'refresh');
 	}
 	
 	function by($card_id, $shirt_id)
@@ -17,6 +18,8 @@ class Saw extends Controller {
 		$shirt_data['card_id'] = $card_id;
 		$shirt_data['shirt_id'] = $shirt_id;
 		$this->card->check($shirt_data);
+		
+		redirect('/front/card/'.$card_id.'/', 'refresh');
 	}
 }
 ?>

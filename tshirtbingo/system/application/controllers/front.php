@@ -29,7 +29,7 @@ class Front extends Controller {
 		}
 		else
 		{
-			redirect('/front/card/'.get_coookie('cardid'), 'refresh');
+			redirect('/front/card/'.get_cookie('cardid'), 'refresh');
 		}
 		
 	}

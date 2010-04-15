@@ -3,11 +3,40 @@ body
 	background-color:#9b0d0d;
 }
 
+.checked_inner
+{
+	position:relative;
+	top:-150px;
+}
+
+.checked_inner_big
+{
+	position:relative;
+	top:-150px;
+}
+
+.checked
+{
+	z-index:1;
+	position:relative;
+	top:150px;
+}
+
 .card
 {
 	background-color:#ffffff;
 	width:800px;
 	padding: 5px;
+}
+
+.checked_div
+{
+	height:200px;
+}
+
+.checked_div_big
+{
+	height:300px;
 }
 
 .box_round 
