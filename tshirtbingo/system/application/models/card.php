@@ -11,13 +11,14 @@ class Card extends Model {
 	{
 		// 1 = easy 2= medium 3=hard
 		
+		$shirts = array();
+		
 		if ($difficulty == 1)
 		{
 			$this->db->select('shirt_id');
 			$this->db->where('ratio >', 65);
 			$query = $this->db->get('shirts');
 		
-			$shirts = array();
 			foreach ($query->result() as $row)
 			{
 				array_push($shirts, $row->shirt_id);

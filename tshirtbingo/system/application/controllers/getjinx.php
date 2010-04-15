@@ -42,7 +42,10 @@ class Getjinx extends Controller {
 			{
 				$shirt_parts = explode('<a href="',$shirt);
 				$url_and_img = explode('"><img src="',$shirt_parts[1]);
-				$url = 'http://www.kqzyfj.com/click-3879724-10356324?url='.urlencode($url_and_img[0].'?ref=c');
+				
+				$url_step_1 = explode('jinx.com/',$url_and_img[0]);
+				
+				$url = 'http://www.jinx.com/track.aspx?rsid=765&url='.urlencode($url_step_1[1]);
 				$image_and_title = explode('"',$url_and_img[1]);
 				$img = $image_and_title[0];
 				
@@ -55,14 +58,26 @@ class Getjinx extends Controller {
 				
 				if (stristr($image_name,'ZoomM')!=false)
 				{
-					$big_image .= '_ZoomB.jpg';
+					$test_big = $big_image;
+					$test_big .= '_ZoomB.jpg';
+					if (file_exists($test_big)) 
+					{
+						$big_image .= '_ZoomB.jpg';
+					} 
+					else 
+					{
+						$big_image .= '_1b.jpg';
+					}
+					//$big_image .= '_ZoomB.jpg';
 				}
 				else
 				{
-					$big_image .= '_1B.jpg';
+					$big_image .= '_1b.jpg';
 				}
 				
-				$title = $image_and_title[3];
+				$big_image = 'http://www.jinx.com/Content/Product/'.$big_image;
+				
+				$title = $image_and_title[2];
 				
 				if ($this->shirt->included($url) == false)
 				{				
