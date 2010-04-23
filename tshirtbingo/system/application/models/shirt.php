@@ -63,5 +63,35 @@ class Shirt extends Model {
 			return $row->enabled;
 		}
 	}
+	
+	function show_all_shirts()
+	{
+		$query = $this->db->get_where('shirts', array('enabled' => 1));
+		
+		$shirt_data = "<table>";
+		
+		$count = 0;
+		
+		foreach ($query->result() as $row)
+		{
+			
+			if ($count == 5)
+			{
+				$count = 0;
+				$shirt_data .= '</tr>';
+			}
+			if ($count == 0)
+			{
+				$shirt_data .= '<tr>';
+			}
+			$shirt_data .= '<td>';
+			
+			$count++;
+		}
+		
+		$shirt_data .= '</table>';
+		
+		return $shirt_data;
+	}
 }
 ?>
