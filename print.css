@@ -1,4 +1,9 @@
 .noPrint 
 { 
     display: none; 
-} 
+}
+
+.printOnly
+{
+	display: inline;
+}

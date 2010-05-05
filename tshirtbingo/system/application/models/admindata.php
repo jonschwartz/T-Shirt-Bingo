@@ -1,7 +1,7 @@
 <?php
-class Admin extends Model {
+class Admindata extends Model {
 
-    function Admin()
+    function Admindata()
     {
         // Call the Model constructor
         parent::Model();

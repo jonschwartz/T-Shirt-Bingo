@@ -9,7 +9,7 @@ class Admin extends Controller {
 
 	function index()
 	{
-		$this->load->model('admin');
+		$this->load->model('admindata');
 		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -24,15 +24,6 @@ class Admin extends Controller {
 			$this->load->view('admin');
 		}
 		
-		$this->load->library('pagination');
-
-		$config['base_url'] = 'http://example.com/index.php/test/page/';
-		$config['total_rows'] = '200';
-		$config['per_page'] = '20'; 
-
-		$this->pagination->initialize($config); 
-
-		echo $this->pagination->create_links();
 	}
 }
 ?>

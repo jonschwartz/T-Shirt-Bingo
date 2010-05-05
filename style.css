@@ -3,6 +3,11 @@ body
 	background-color:#9b0d0d;
 }
 
+.printOnly
+{
+	display:none;
+}
+
 .checked_inner
 {
 	position:relative;
