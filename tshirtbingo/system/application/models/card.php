@@ -195,7 +195,7 @@ class Card extends Model {
 					$card_data .='/><br/>'.$title.'</a>';
 					if ($shirt_is_checked == 0)
 					{
-						$card_data .='<br/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="noPrint"/>';
+						$card_data .='<br class="noPrint"/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="button noPrint"/>';
 					}
 					$card_data .='</center></div></div></td>'."\n";
 				}
