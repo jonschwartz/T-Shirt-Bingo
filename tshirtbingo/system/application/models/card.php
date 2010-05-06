@@ -117,7 +117,10 @@ class Card extends Model {
 			foreach ($query->result() as $row)
 			{
 				$ratio = $row->ratio;
-				$ratio--;
+				if ($ratio > 0)
+				{
+					$ratio--;
+				}
 			}
 			
 			$shirt_update_data['ratio'] = $ratio;

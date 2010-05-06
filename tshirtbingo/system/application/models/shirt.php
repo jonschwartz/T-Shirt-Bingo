@@ -104,7 +104,10 @@ class Shirt extends Model {
 		foreach ($query->result() as $row)
 		{
 			$ratio = $row->ratio;
-			$ratio++;
+			if ($ratio < 100)
+			{
+				$ratio++;
+			}
 		}
 		
 		$shirt_update_data['ratio'] = $ratio;
