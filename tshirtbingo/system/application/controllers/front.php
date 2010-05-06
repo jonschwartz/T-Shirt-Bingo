@@ -23,7 +23,8 @@ class Front extends Controller {
 			set_cookie($cookie);
 			
 			$card_data['card_data'] = $this->card->show_card($card_id,"");
-			$this->load->view('header');
+			$header_data['card_id'] = $card_id;
+			$this->load->view('header',$header_data);
 			$this->load->view('card', $card_data);
 			$this->load->view('footer');
 		}
@@ -36,7 +37,8 @@ class Front extends Controller {
 	
 	function card($card_id,$big='')
 	{
-		$this->load->view('header');
+		$header_data['card_id'] = $card_id;
+		$this->load->view('header',$header_data);
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
@@ -44,8 +46,9 @@ class Front extends Controller {
 	
 	function easy($big='')
 	{
-		$this->load->view('header');
 		$card_id = $this->card->generate_card(1); // generates a random easy card
+		$header_data['card_id'] = $card_id;
+		$this->load->view('header',$header_data);
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
@@ -61,8 +64,9 @@ class Front extends Controller {
 	
 	function medium($big='')
 	{
-		$this->load->view('header');
 		$card_id = $this->card->generate_card(2); // generates a random medium card
+		$header_data['card_id'] = $card_id;
+		$this->load->view('header',$header_data);
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
@@ -78,8 +82,9 @@ class Front extends Controller {
 	
 	function hard($big='')
 	{
-		$this->load->view('header');
 		$card_id = $this->card->generate_card(3); // generates a random hard card
+		$header_data['card_id'] = $card_id;
+		$this->load->view('header',$header_data);
 		$card_data['card_data'] = $this->card->show_card($card_id,$big);
 		$this->load->view('card', $card_data);
 		$this->load->view('footer');
