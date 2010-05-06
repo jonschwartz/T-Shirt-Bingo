@@ -13,23 +13,49 @@ class Card extends Model {
 		
 		$shirts = array();
 		
-		if ($difficulty == 1)
+		//if ($difficulty == 1)
+		//{
+		$this->db->select('shirt_id');
+		$this->db->where('ratio >', 65);
+		$query = $this->db->get('shirts');
+	
+		foreach ($query->result() as $row)
 		{
-			$this->db->select('shirt_id');
-			$this->db->where('ratio >', 65);
-			$query = $this->db->get('shirts');
-		
-			foreach ($query->result() as $row)
-			{
-				array_push($shirts, $row->shirt_id);
-				
-				// Update, set shirt ratio down 1 if it would end up being > 0
-				
-			}
-			shuffle($shirts);
-			$rand_shirts = array_rand($shirts, 25);
+			array_push($shirts, $row->shirt_id);
+			
+			// Update, set shirt ratio down 1 if it would end up being > 0
+			
 		}
-		elseif ($difficulty == 2)
+		shuffle($shirts);
+		$easy_shirts = array_rand($shirts, 15);
+		
+		$this->db->select('shirt_id');
+		$this->db->where('ratio <=', 65);
+		$this->db->where('ratio >', 35);
+		$query = $this->db->get('shirts');
+	
+		foreach ($query->result() as $row)
+		{
+			array_push($shirts, $row->shirt_id);
+		}
+		
+		shuffle($shirts);
+		$medium_shirts = array_rand($shirts, 5);
+		
+		$this->db->select('shirt_id');
+		$this->db->where('ratio <=', 35);
+		$query = $this->db->get('shirts');
+	
+		foreach ($query->result() as $row)
+		{
+			array_push($shirts, $row->shirt_id);
+		}
+		
+		shuffle($shirts);
+		$hard_shirts = array_rand($shirts, 5);
+		
+		//}
+		/*elseif ($difficulty == 2)
 		{
 			$this->db->select('shirt_id');
 			$this->db->where('ratio <=', 65);
@@ -57,16 +83,48 @@ class Card extends Model {
 			
 			shuffle($shirts);
 			$rand_shirts = array_rand($shirts, 25);
-		}
+		}*/
+		
+		$rand_shirts = array_merge($easy_shirts,$medium_shirts,$hard_shirts);
+		
+		shuffle($rand_shirts);
 		
 		$rand_shirts = array_rand($rand_shirts, 25);
 		
 		$shirt_string = $shirts[$rand_shirts[0]];
+		
+		$this->db->select('ratio');
+		$this->db->where('shirt_id =', $shirts[$rand_shirts[0]]);
+		$query = $this->db->get('shirts');
+		foreach ($query->result() as $row)
+		{
+			$ratio = $row->ratio;
+			$ratio--;
+		}
+		
+		$shirt_update_data['ratio'] = $ratio;
+		
+		$this->db->where('shirt_id', $shirts[$rand_shirts[0]]);
+		$this->db->update('shirts',$shirt_update_data);
+		
 		array_shift($rand_shirts);
 		
 		foreach ($rand_shirts as $shirt)
 		{
+			$this->db->select('ratio');
+			$this->db->where('shirt_id =', $shirts[$shirt]);
+			$query = $this->db->get('shirts');
+			foreach ($query->result() as $row)
+			{
+				$ratio = $row->ratio;
+				$ratio--;
+			}
 			
+			$shirt_update_data['ratio'] = $ratio;
+			
+			$this->db->where('shirt_id', $shirts[$shirt]);
+			$this->db->update('shirts',$shirt_update_data);
+		
 			$shirt_string .= ','.$shirts[$shirt];
 		}
 		
@@ -218,7 +276,7 @@ class Card extends Model {
 			}
 		}
 		
-		$card_data .= '</table>'."\n".'<br class="noPrint"/>'."\n".'<table class="noPrint">'."\n".'<tr><td><a href="http://www.tshirtbingo.com/front/card/'.$card_id.'/big">Bigger Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/front/easy">Easier Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/front/medium">Medium Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/front/hard">Harder Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/front/card/'.$card_id.'/">Get this Card Again</a></td></tr>'."\n".'</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
+		$card_data .= '</table>'."\n".'<br class="noPrint"/>'."\n".'<table class="noPrint">'."\n".'<tr><td><a href="http://www.tshirtbingo.com/front/card/'.$card_id.'/big">Bigger Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/front/easy">Get a New Card</a></td></tr>'."\n".'</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
 		return ($card_data);
 	}
 	

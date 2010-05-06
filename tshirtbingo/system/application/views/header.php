@@ -1,11 +1,18 @@
+<?php header ('Cache-Control: max-age=1800, must-revalidate'); ?>
+
 <html>
 <head>
+
+<META NAME="ROBOTS" CONTENT="ALL"> 
+<META NAME="ROBOTS" CONTENT="INDEX,NOFOLLOW"> 
+<META NAME="KEYWORDS" CONTENT="tshirt, bingo, t-shirt, t-shirt bingo, games, meatspace, geek">
+<META NAME="DESCRIPTION" CONTENT="T-Shirt Bingo is a meatspace game that combines awesome t-shirts with bingo.  Play with friends, at concerts, at conventions, or anywhere geeks gather!">
+<META NAME="COPYRIGHT" CONTENT="&copy; T-Shirt Bingo">
+<META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US">
+<META NAME="AUTHOR" CONTENT="T-Shirt Bingo">
+
 <title>T-Shirt Bingo</title>
-<style type="text/css">
-@page {
-  size: Letter portrait;
-}
-</style>
+
 <LINK href="http://www.tshirtbingo.com/style.css" rel="stylesheet" type="text/css" media="screen">
 <link href="http://www.tshirtbingo.com/print.css" rel="stylesheet" type="text/css" media="print"> 
 </head>

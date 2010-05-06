@@ -18,6 +18,7 @@ class Saw extends Controller {
 		$shirt_data['card_id'] = $card_id;
 		$shirt_data['shirt_id'] = $shirt_id;
 		$this->card->check($shirt_data);
+		$this->shirt->saw($shirt_data);
 		
 		redirect('/front/card/'.$card_id.'/', 'refresh');
 	}

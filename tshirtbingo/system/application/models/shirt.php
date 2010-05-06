@@ -93,5 +93,24 @@ class Shirt extends Model {
 		
 		return $shirt_data;
 	}
+	
+	function saw($shirt_data)
+	{
+		$shirt_id = $shirt_data['shirt_id'];
+
+		$this->db->select('ratio');
+		$this->db->where('shirt_id =', $shirt_id);
+		$query = $this->db->get('shirts');
+		foreach ($query->result() as $row)
+		{
+			$ratio = $row->ratio;
+			$ratio++;
+		}
+		
+		$shirt_update_data['ratio'] = $ratio;
+		
+		$this->db->where('shirt_id', $shirt_id);
+		$this->db->update('shirts',$shirt_update_data);
+	}
 }
 ?>
