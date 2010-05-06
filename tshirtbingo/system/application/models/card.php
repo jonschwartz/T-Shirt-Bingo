@@ -251,7 +251,7 @@ class Card extends Model {
 					{
 						$card_data .= '<img src="http://www.tshirtbingo.com/checked.png" border = "0" class ="checked noPrint" width="150" height="150"/>';
 					}
-					$card_data .= '<table><tr><td><a href="'.$image_big_url.'" rel="lightbox[card]" title="'.$title.'"class="noPrint enlarge">+</a></td><td>';
+					$card_data .= '<table><tr><td><a href="'.$image_big_url.'" rel="lightbox[card]" title="'.$title.'" alt = "click here for a larger image" class="noPrint enlarge">[+]</a></td><td>';
 					$card_data .= '<img src="'.$image_url.'" border=0';
 					if ($shirt_is_checked == 1)
 					{
@@ -281,7 +281,7 @@ class Card extends Model {
 			}
 		}
 		
-		$card_data .= '</table>'."\n".'<br class="noPrint"/>'."\n".'<table class="noPrint">'."\n".'<tr><td><a href="http://www.tshirtbingo.com/front/card/'.$card_id.'/big">Bigger Shirt Images</a></td><td>|</td><td><a href="http://www.tshirtbingo.com/front/easy">Get a New Card</a></td></tr>'."\n".'</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
+		$card_data .= '</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
 		return ($card_data);
 	}
 	

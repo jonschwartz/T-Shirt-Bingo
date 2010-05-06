@@ -36,7 +36,7 @@
 				<span>T-Shirt Bingo</span>
 			</td>
 			<td align="right" valign="top" class="topnav noPrint">
-				<a href="http://tshirtbingo.com/">Home</a> | About The Game | About Us | Contact Us | <a href="http://twitter.com/tshirtbingo" target="_new">Twitter</a> | <a href="http://zazzle.com/tshirtbingo" target="_new">Store</a>
+				<a href="http://tshirtbingo.com/">Home</a> | <a href="http://www.tshirtbingo.com/front/easy">Get a New Card</a> | About The Game | About Us | Contact Us | <a href="http://twitter.com/tshirtbingo" target="_new">Twitter</a> | <a href="http://zazzle.com/tshirtbingo" target="_new">Store</a>
 			</td>
 		</tr>
 	</table>
