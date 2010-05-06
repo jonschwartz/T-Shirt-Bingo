@@ -11,6 +11,9 @@
 <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US">
 <META NAME="AUTHOR" CONTENT="T-Shirt Bingo">
 
+<link rel="shortcut icon" type="image/x-icon" href="http://tshirtbingo.com/favicon.ico" /> 
+<link rel="icon" type="image/x-icon" href="http://tshirtbingo.com/favicon.ico" />
+
 <title>T-Shirt Bingo</title>
 
 <LINK href="http://www.tshirtbingo.com/style.css" rel="stylesheet" type="text/css" media="screen">

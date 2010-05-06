@@ -8,84 +8,46 @@ class Card extends Model {
     }
 	
 	function generate_card($difficulty)
-	{
-		// 1 = easy 2= medium 3=hard
-		
+	{		
 		$shirts = array();
+		$easy = array();
+		$medium = array();
+		$hard = array();
 		
-		//if ($difficulty == 1)
-		//{
-		$this->db->select('shirt_id');
-		$this->db->where('ratio >', 65);
-		$query = $this->db->get('shirts');
-	
-		foreach ($query->result() as $row)
-		{
-			array_push($shirts, $row->shirt_id);
-			
-			// Update, set shirt ratio down 1 if it would end up being > 0
-			
-		}
-		shuffle($shirts);
-		$easy_shirts = array_rand($shirts, 15);
 		
 		$this->db->select('shirt_id');
-		$this->db->where('ratio <=', 65);
-		$this->db->where('ratio >', 35);
+		//$this->db->where('ratio >', 65);
+		$this->db->where('enabled =', 1);
+		$this->db->order_by("ratio", "desc"); 
 		$query = $this->db->get('shirts');
 	
-		foreach ($query->result() as $row)
-		{
-			array_push($shirts, $row->shirt_id);
-		}
-		
-		shuffle($shirts);
-		$medium_shirts = array_rand($shirts, 5);
-		
-		$this->db->select('shirt_id');
-		$this->db->where('ratio <=', 35);
-		$query = $this->db->get('shirts');
+		$num_shirts = $this->db->count_all_results();
 	
+		$x = 0;
 		foreach ($query->result() as $row)
 		{
-			array_push($shirts, $row->shirt_id);
-		}
-		
-		shuffle($shirts);
-		$hard_shirts = array_rand($shirts, 5);
-		
-		//}
-		/*elseif ($difficulty == 2)
-		{
-			$this->db->select('shirt_id');
-			$this->db->where('ratio <=', 65);
-			$this->db->where('ratio >', 35);
-			$query = $this->db->get('shirts');
-		
-			foreach ($query->result() as $row)
+			if ($x < ($num_shirts/3))
 			{
-				array_push($shirts, $row->shirt_id);
+				array_push($easy, $row->shirt_id);
+			}
+			if (($x >= ($num_shirts/3)) and ($x <= (($num_shirts/3)*2)))
+			{
+				array_push($medium, $row->shirt_id);
+			}
+			if ($x > (($num_shirts/3)*2))
+			{
+				array_push($hard, $row->shirt_id);
 			}
 			
-			shuffle($shirts);
-			$rand_shirts = array_rand($shirts, 25);
-		}
-		elseif ($difficulty == 3)
-		{
-			$this->db->select('shirt_id');
-			$this->db->where('ratio <=', 35);
-			$query = $this->db->get('shirts');
-		
-			foreach ($query->result() as $row)
-			{
-				array_push($shirts, $row->shirt_id);
-			}
+			array_push($shirts,$row->shirt_id);
 			
-			shuffle($shirts);
-			$rand_shirts = array_rand($shirts, 25);
-		}*/
+			$x++;
+		}
+		shuffle($easy);
+		shuffle($medium);
+		shuffle($hard);
 		
-		$rand_shirts = array_merge($easy_shirts,$medium_shirts,$hard_shirts);
+		$rand_shirts = array_merge($easy,$medium,$hard);
 		
 		shuffle($rand_shirts);
 		
