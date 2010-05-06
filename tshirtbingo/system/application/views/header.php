@@ -15,6 +15,12 @@
 
 <LINK href="http://www.tshirtbingo.com/style.css" rel="stylesheet" type="text/css" media="screen">
 <link href="http://www.tshirtbingo.com/print.css" rel="stylesheet" type="text/css" media="print"> 
+<link rel="stylesheet" href="http://www.tshirtbingo.com/css/lightbox.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="http://www.tshirtbingo.com/js/prototype.js"></script>
+<script type="text/javascript" src="http://www.tshirtbingo.com/js/scriptaculous.js?load=effects,builder"></script>
+<script type="text/javascript" src="http://www.tshirtbingo.com/js/lightbox.js"></script>
+
 </head>
 <body>
 <center>

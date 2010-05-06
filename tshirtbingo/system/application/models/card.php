@@ -193,6 +193,7 @@ class Card extends Model {
 				foreach ($shirt_detail_query->result() as $shirt_detail_row)
 				{
 					$image_url = $image_base_url.$shirt_detail_row->image;
+					$image_big_url = 'http://tshirtbingo.com/shirts/large/'.$shirt_detail_row->image;
 					$title = $shirt_detail_row->title;
 					$url = $shirt_detail_row->url;
 				}
@@ -250,12 +251,13 @@ class Card extends Model {
 					{
 						$card_data .= '<img src="http://www.tshirtbingo.com/checked.png" border = "0" class ="checked noPrint" width="150" height="150"/>';
 					}
+					$card_data .= '<table><tr><td><a href="'.$image_big_url.'" rel="lightbox[card]" title="'.$title.'"class="noPrint enlarge">+</a></td><td>';
 					$card_data .= '<img src="'.$image_url.'" border=0';
 					if ($shirt_is_checked == 1)
 					{
 						$card_data .= ' class="checked_shirt" ';
 					}
-					$card_data .='/><br/>'.$title.'</a>';
+					$card_data .='/></td></tr></table><br/>'.$title.'</a>';
 					if ($shirt_is_checked == 0)
 					{
 						$card_data .='<br class="noPrint"/><input type="button" value = "Saw it!" onClick="location.href=\'http://www.tshirtbingo.com/index.php/saw/by/'.$card_id.'/'.$shirt_id.'\'" class="button noPrint"/>';
