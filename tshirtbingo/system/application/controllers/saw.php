@@ -22,5 +22,13 @@ class Saw extends Controller {
 		
 		redirect('/front/card/'.$card_id.'/', 'refresh');
 	}
+	
+	function checkbox($card_id,$checkbox)
+	{
+		$check_data['card_id'] = $card_id;
+		$check_data['checkbox'] = $checkbox;
+		
+		$this->card->checkbox($check_data);
+	}
 }
 ?>

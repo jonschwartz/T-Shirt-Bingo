@@ -140,9 +140,11 @@ class Card extends Model {
 		{
 			$shirts = $row->shirts;
 			$checked = $row->checked;
+			$checkboxes = $row->checkboxes;
 			
 			$shirt_ids = explode(',',$shirts);
 			$checked_shirts = explode(',',$checked);
+			$check_boxes_checked = explode(',',$checkboxes);
 			
 			
 			for($count = 0; $count <= 24; $count++)
@@ -243,8 +245,98 @@ class Card extends Model {
 			}
 		}
 		
-		$card_data .= '</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td><input type="checkbox"/></td></tr>'."\n".'<tr><td><input type="checkbox"/></td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td><input type="checkbox"/></td></tr>'."\n".'</table>'."\n".'</div>';
+		$card_data .= '</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td>';
+		$card_data .= '<input type="checkbox" ';
+		foreach ($check_boxes_checked as $check_box)
+		{
+			if ($check_box == 1)
+			{
+				$card_data .= 'checked';
+			}
+		}
+		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/1\');"/>';
+		$card_data .= '</td><td>That guy wearing the shirt from the show to the show.</td><td>That girl wearing the shirt from the show to the show.</td><td>';
+		$card_data .= '<input type="checkbox" ';
+		foreach ($check_boxes_checked as $check_box)
+		{
+			if ($check_box == 2)
+			{
+				$card_data .= 'checked';
+			}
+		}
+		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/2\');"/>';
+		$card_data .= '</td></tr>'."\n".'<tr><td>';
+		$card_data .= '<input type="checkbox" ';
+		foreach ($check_boxes_checked as $check_box)
+		{
+			if ($check_box == 3)
+			{
+				$card_data .= 'checked';
+			}
+		}
+		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/3\');"/>';
+		$card_data .= '</td><td>That guy wearing the shirt from the show which he just bought, and he\'s wearing it over the shirt he wore here.</td><td>That girl wearing the shirt from the show which she just bought, and she\'s wearing it over the shirt she wore here.</td><td>';
+		$card_data .= '<input type="checkbox" ';
+		foreach ($check_boxes_checked as $check_box)
+		{
+			if ($check_box == 4)
+			{
+				$card_data .= 'checked';
+			}
+		}
+		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/4\');"/>';
+		$card_data .= '</td></tr>'."\n".'<tr><td>';
+		$card_data .= '<input type="checkbox" ';
+		foreach ($check_boxes_checked as $check_box)
+		{
+			if ($check_box == 5)
+			{
+				$card_data .= 'checked';
+			}
+		}
+		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/5\');"/>';
+		$card_data .= '</td><td>That guy wearing the shirt from the show over the clothes he obviously wore to work that day.</td><td>That girl wearing the shirt from the show over the clothes she obviously wore to work that day.</td><td>';
+		$card_data .= '<input type="checkbox" ';
+		foreach ($check_boxes_checked as $check_box)
+		{
+			if ($check_box == 6)
+			{
+				$card_data .= 'checked';
+			}
+		}
+		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/6\');"/>';
+		$card_data .= '</td></tr>'."\n".'</table>'."\n".'</div>';
+		
 		return ($card_data);
+	}
+	
+	function checkbox($check_data)
+	{
+		$card_id = $check_data['card_id'];
+		$checkbox = $check_data['checkbox'];
+		
+		$query = $this->db->get_where('cards', array('card_id' => $shirt_data['card_id']));
+		
+		foreach ($query->result() as $row)
+		{
+			$checked = $row->checkboxes;
+		}
+		
+		if (($checked != "") and (isset($checked)))
+		{
+			$checked .= ','.$check_data['checkbox'];
+		}
+		else
+		{
+			$checked .= $check_data['checkbox'];
+		}
+		
+		$check_update_data = array (
+			'checkboxes' => $checked
+		);
+		
+		$this->db->where('card_id', $shirt_data['card_id']);
+		$this->db->update('cards',$check_update_data);
 	}
 	
 	function check($shirt_data)
