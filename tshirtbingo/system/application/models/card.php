@@ -159,7 +159,14 @@ class Card extends Model {
 					$image_url = $image_base_url.$shirt_detail_row->image;
 					$image_big_url = 'http://tshirtbingo.com/shirts/large/'.$shirt_detail_row->image;
 					$title = $shirt_detail_row->title;
-					$url = $shirt_detail_row->url;
+					if ($shirt_detail_row->frame == 0)
+					{
+						$url = $shirt_detail_row->url;
+					}
+					else
+					{
+						$url = 'http://www.tshirtbingo.com/framer/get/'.$shirt_id;
+					}
 				}
 				
 				
