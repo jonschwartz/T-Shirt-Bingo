@@ -115,5 +115,13 @@ class Shirt extends Model {
 		$this->db->where('shirt_id', $shirt_id);
 		$this->db->update('shirts',$shirt_update_data);
 	}
+	
+	function toggle_frame($shirt_id)
+	{
+	}
+	
+	function toggle_active($shirt_id)
+	{
+	}
 }
 ?>

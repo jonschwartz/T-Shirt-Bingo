@@ -1,5 +1,6 @@
 User-Agent: *
 Disallow: /front/card/
+Disallow: /admin/
 Allow: /
 
 sitemap: http://tshirtbingo.com/sitemap.xml
