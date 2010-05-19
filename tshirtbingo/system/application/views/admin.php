@@ -7,7 +7,8 @@
 <div 
 <?php echo form_open('admin/shirts');?>
 <table class="card box_round box_shadow">
-<tr><th>Shirt ID</th><th>Shirt Name</th><th>Link</th><th>Company</th><th>Active?</th><th>Frame?</th></tr>
+<tr><th>Shirt ID</th><th>Shirt Name</th><th>Link</th><th>Image</th><th>Company</th><th>Active?</th><th>Frame?</th></tr>
+<?php echo $shirt_data;?>
 </table>
 </form>
 </body>

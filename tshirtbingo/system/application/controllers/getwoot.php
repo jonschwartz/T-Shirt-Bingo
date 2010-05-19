@@ -30,48 +30,57 @@ class Getwoot extends Controller {
 			$product_block_split = explode('<div id="pagenav-footer">',$product_block_rough);
 			$product_block = $product_block_split[0];
 
-			$product_block = str_replace('/Content/Product/','http://www.jinx.com/Content/Product/',$product_block);
+			//$product_block = str_replace('/Content/Product/','http://www.jinx.com/Content/Product/',$product_block);
 			
 			//$product_block = str_replace('/tshirts-apparel/','http://www.thinkgeek.com/tshirts-apparel/',$product_block);
 
-			$shirts = explode('<div class="product', $product_block);
+			//<a href="http://shirt.woot.com/Friends.aspx?k=9200" title="Rock Paper Scissors"><img height="95" width="125" src="http://sale.images.woot.com/Rock_Paper_Scissorshg9Thumbnail.png" alt="Rock Paper Scissors" border="0"></a> 
+			
+			
+			$shirts = explode('<a href="', $product_block);
 
 			array_shift($shirts);
+			array_pop($shirts);
 			
 			foreach ($shirts as $shirt)
 			{
-				$shirt_parts = explode('<a href="',$shirt);
-				$url_and_img = explode('"><img src="',$shirt_parts[1]);
-				$url = 'http://www.kqzyfj.com/click-3879724-10356324?url='.urlencode($url_and_img[0].'?ref=c');
-				$image_and_title = explode('"',$url_and_img[1]);
-				$img = $image_and_title[0];
+				//$shirt_parts = explode('<a href="',$shirt);
+				$url_and_img = explode('"><img height="95" width="125" src="',$shirt);
+				
+				$url_and_title = explode('" title="',$url_and_img[0]);
+				
+				$url = $url_and_title[0];
+				$title = $url_and_title[1];
+				
+				$image_and_junk = explode('" alt="',$url_and_img[1]);
+				
+				$img = $image_and_junk[0];
 				
 				$url_parts = explode('/',$img);
 				$image_name = end($url_parts);
 				
-				$image_name_parts = explode('_',$image_name);
+				$image_name_parts = explode('Thumbnail',$image_name);
 				
-				$big_image = $image_name_parts[0].'_'.$image_name_parts[1];
+				$big_image = '';
 				
-				if (stristr($image_name,'ZoomM')!=false)
+				foreach ($url_parts as $part)
 				{
-					$big_image .= '_ZoomB.jpg';
-				}
-				else
-				{
-					$big_image .= '_1B.jpg';
+					if ($part != $image_name)
+					{
+						$big_image .= $part.'/';
+					}
 				}
 				
-				$title = $image_and_title[3];
+				//$big_image .= $image_name_parts[0].'Standard'.$image_name_parts[1];
 				
 				if ($this->shirt->included($url) == false)
 				{				
 					$small_shirt_image = file_get_contents($img);
 					
-					$big_shirt_image = file_get_contents($big_image);
+					//$big_shirt_image = file_get_contents($big_image);
 					
 					file_put_contents($small_image_directory.$image_name,$small_shirt_image,FILE_BINARY);
-					file_put_contents($large_image_directory.$image_name,$big_shirt_image,FILE_BINARY);
+					//file_put_contents($large_image_directory.$image_name,$big_shirt_image,FILE_BINARY);
 					
 					$shirt_info['url'] = $url;
 					$shirt_info['title'] = $title;
@@ -79,6 +88,7 @@ class Getwoot extends Controller {
 					$shirt_info['ratio'] = 50;
 					$shirt_info['company'] = 'woot';
 					$shirt_info['enabled'] = true;
+					$shirt_info['frame'] = true;
 					
 					$this->shirt->insert($shirt_info);
 				}

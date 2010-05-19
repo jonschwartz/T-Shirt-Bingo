@@ -81,7 +81,7 @@ class Card extends Model {
 				$ratio = $row->ratio;
 				if ($ratio > 0)
 				{
-					$ratio--;
+					$ratio = $ratio - 0.01;
 				}
 			}
 			
@@ -222,7 +222,12 @@ class Card extends Model {
 					{
 						$card_data .= '<img src="http://www.tshirtbingo.com/checked.png" border = "0" class ="checked noPrint" width="150" height="150"/>';
 					}
-					$card_data .= '<table><tr><td><a href="'.$image_big_url.'" rel="lightbox[card]" title="'.$title.'" alt = "click here for a larger image" class="noPrint enlarge">[+]</a></td><td>';
+					$card_data .= '<table><tr><td>';
+					if ($shirt_detail_row->company != "woot")
+					{
+						$card_data .= '<a href="'.$image_big_url.'" rel="lightbox[card]" title="'.$title.'" alt = "click here for a larger image" class="noPrint enlarge">[+]</a>';
+					}
+					$card_data .= '</td><td>';
 					$card_data .= '<img src="'.$image_url.'" border=0';
 					if ($shirt_is_checked == 1)
 					{

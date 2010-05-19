@@ -66,30 +66,68 @@ class Shirt extends Model {
 	
 	function show_all_shirts()
 	{
-		$query = $this->db->get_where('shirts', array('enabled' => 1));
+		$query = $this->db->get('shirts');
 		
-		$shirt_data = "<table>";
+		$image_base_url = 'http://tshirtbingo.com/shirts/small/';
 		
 		$count = 0;
+		
+		$shirt_data = '';
 		
 		foreach ($query->result() as $row)
 		{
 			
-			if ($count == 5)
+/*			if ($count == 5)
 			{
 				$count = 0;
 				$shirt_data .= '</tr>';
 			}
-			if ($count == 0)
+			elseif ($count == 0)
 			{
 				$shirt_data .= '<tr>';
-			}
-			$shirt_data .= '<td>';
+			}*/
 			
-			$count++;
+			$shirt_data .= '<tr>';
+			$shirt_data .= '<td>';
+			$shirt_data .= $row->shirt_id;
+			$shirt_data .= '</td>';
+
+			$shirt_data .= '<td>';
+			$shirt_data .= $row->title;
+			$shirt_data .= '</td>';
+
+			$shirt_data .= '<td>';
+			$shirt_data .= '<a href="'.$row->url.'" target="new">Click to open in a new window.</a>';
+			$shirt_data .= '</td>';
+			
+			$shirt_data .= '<td>';
+			$shirt_data .= '<img src="'.$image_base_url.$row->image.'"/>';
+			$shirt_data .= '</td>';
+			
+			$shirt_data .= '<td>';
+			$shirt_data .= $row->company;
+			$shirt_data .= '</td>';
+			
+			$shirt_data .= '<td>';
+			$shirt_data .= '<input type="checkbox" value = "1" name="'.$row->shirt_id.'active"';
+			if ($row->enabled == 1)
+			{
+				$shirt_data .= ' checked';
+			}
+			$shirt_data .= '/>';
+			
+			$shirt_data .= '<td>';
+			$shirt_data .= '<input type="checkbox" value = "1" name="'.$row->shirt_id.'frame"';
+			if ($row->frame == 1)
+			{
+				$shirt_data .= ' checked';
+			}
+			$shirt_data .= '/>';
+			
+			$shirt_data .= '</td>';
+			$shirt_data .= '</tr>';
+			//$count++;
 		}
-		
-		$shirt_data .= '</table>';
 		
 		return $shirt_data;
 	}
@@ -106,7 +144,7 @@ class Shirt extends Model {
 			$ratio = $row->ratio;
 			if ($ratio < 100)
 			{
-				$ratio++;
+				$ratio = $ratio + 0.01;
 			}
 		}
 		
@@ -114,6 +152,27 @@ class Shirt extends Model {
 		
 		$this->db->where('shirt_id', $shirt_id);
 		$this->db->update('shirts',$shirt_update_data);
+	}
+	
+	function get_five_random_shirts()
+	{
+		$this->db->where('frame =', '0');
+		$this->db->limit(5);
+		$this->db->order_by('shirt_id','random');
+		$query = $this->db->get('shirts');
+		
+		$other_shirts = '<center><span class="card box_round box_shadow"><h3>Other Fine Shirts</h3><br/><table><tr>';
+		
+		
+		
+		foreach ($query->result() as $row)
+		{
+			$other_shirts .= '<td><a href="'.$row->url.'" target= "new"><img src="http://www.tshirtbingo.com/shirts/small/'.$row->image.'" alt="'.$row->title.'" border=0 /></a></td>';
+		}
+		
+		$other_shirts .= '</tr></table></span></center>';
+		
+		return ($other_shirts);
 	}
 	
 	function toggle_frame($shirt_id)
