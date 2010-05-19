@@ -157,11 +157,12 @@ class Shirt extends Model {
 	function get_five_random_shirts()
 	{
 		$this->db->where('frame =', '0');
+		$this->db->where('enabled =', '1');
 		$this->db->limit(5);
 		$this->db->order_by('shirt_id','random');
 		$query = $this->db->get('shirts');
 		
-		$other_shirts = '<center><span class="card box_round box_shadow"><h3>Other Fine Shirts</h3><br/><table><tr>';
+		$other_shirts = '<center><table class="card box_round box_shadow"><tr><td colspan = "5"><h3>Other Fine Shirts</h3><br/></td></tr><tr>';
 		
 		
 		
@@ -170,7 +171,7 @@ class Shirt extends Model {
 			$other_shirts .= '<td><a href="'.$row->url.'" target= "new"><img src="http://www.tshirtbingo.com/shirts/small/'.$row->image.'" alt="'.$row->title.'" border=0 /></a></td>';
 		}
 		
-		$other_shirts .= '</tr></table></span></center>';
+		$other_shirts .= '</tr></table></center><br/><br/>';
 		
 		return ($other_shirts);
 	}

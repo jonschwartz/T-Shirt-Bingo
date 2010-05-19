@@ -71,7 +71,7 @@ class Getwoot extends Controller {
 					}
 				}
 				
-				//$big_image .= $image_name_parts[0].'Standard'.$image_name_parts[1];
+				//$big_image .= $image_name_parts[0].'Detail'.$image_name_parts[1];
 				
 				if ($this->shirt->included($url) == false)
 				{				

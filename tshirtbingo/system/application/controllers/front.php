@@ -46,12 +46,14 @@ class Front extends Controller {
 	
 	function easy($big='')
 	{
+		delete_cookie('cardid');
+		
 		$card_id = $this->card->generate_card(1); // generates a random easy card
-		$header_data['card_id'] = $card_id;
-		$this->load->view('header',$header_data);
-		$card_data['card_data'] = $this->card->show_card($card_id,$big);
-		$this->load->view('card', $card_data);
-		$this->load->view('footer');
+		//$header_data['card_id'] = $card_id;
+		//$this->load->view('header',$header_data);
+		//$card_data['card_data'] = $this->card->show_card($card_id,$big);
+		//$this->load->view('card', $card_data);
+		//$this->load->view('footer');
 		
 		$cookie = array(
 					   'name'   => 'cardid',
@@ -60,6 +62,8 @@ class Front extends Controller {
 				   );
 
 		set_cookie($cookie);
+		
+		redirect('/front/card/'.$card_id, 'refresh');
 	}
 	
 	function medium($big='')
