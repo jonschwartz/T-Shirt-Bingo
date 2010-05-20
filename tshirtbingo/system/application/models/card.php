@@ -120,11 +120,11 @@ class Card extends Model {
 		
 		if ($big != "")
 		{
-			$image_base_url = 'http://tshirtbingo.com/shirts/large/';
+			$image_base_url = 'http://www.tshirtbingo.com/shirts/large/';
 		}
 		else
 		{
-			$image_base_url = 'http://tshirtbingo.com/shirts/small/';
+			$image_base_url = 'http://www.tshirtbingo.com/shirts/small/';
 		}
 		
 		//$this->db->select('shirts','checked');
@@ -157,7 +157,7 @@ class Card extends Model {
 				foreach ($shirt_detail_query->result() as $shirt_detail_row)
 				{
 					$image_url = $image_base_url.$shirt_detail_row->image;
-					$image_big_url = 'http://tshirtbingo.com/shirts/large/'.$shirt_detail_row->image;
+					$image_big_url = 'http://www.tshirtbingo.com/shirts/large/'.$shirt_detail_row->image;
 					$title = $shirt_detail_row->title;
 					if ($shirt_detail_row->frame == 0)
 					{

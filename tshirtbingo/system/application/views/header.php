@@ -1,4 +1,4 @@
-<?php header ('Cache-Control: max-age=1800, must-revalidate'); ?>
+<?php //header ('ExpiresDefault "access plus 30 days"'); ?>
 
 <html>
 <head>

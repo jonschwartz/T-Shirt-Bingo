@@ -46,8 +46,8 @@
 //  Configurationl
 //
 LightboxOptions = Object.extend({
-    fileLoadingImage:        'http://tshirtbingo.com/images/loading.gif',     
-    fileBottomNavCloseImage: 'http://tshirtbingo.com/images/closelabel.gif',
+    fileLoadingImage:        'http://www.tshirtbingo.com/images/loading.gif',     
+    fileBottomNavCloseImage: 'http://www.tshirtbingo.com/images/closelabel.gif',
 
     overlayOpacity: 0.8,   // controls transparency of shadow overlay
 
