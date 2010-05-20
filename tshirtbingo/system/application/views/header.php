@@ -4,15 +4,15 @@
 <head>
 
 <META NAME="ROBOTS" CONTENT="ALL"> 
-<META NAME="ROBOTS" CONTENT="INDEX,NOFOLLOW"> 
+<META NAME="ROBOTS" CONTENT="INDEX,FOLLOW"> 
 <META NAME="KEYWORDS" CONTENT="tshirt, bingo, t-shirt, t-shirt bingo, games, meatspace, geek">
 <META NAME="DESCRIPTION" CONTENT="T-Shirt Bingo is a meatspace game that combines awesome t-shirts with bingo.  Play with friends, at concerts, at conventions, or anywhere geeks gather!">
 <META NAME="COPYRIGHT" CONTENT="&copy; T-Shirt Bingo">
 <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US">
 <META NAME="AUTHOR" CONTENT="T-Shirt Bingo">
 
-<link rel="shortcut icon" type="image/x-icon" href="http://tshirtbingo.com/favicon.ico" /> 
-<link rel="icon" type="image/x-icon" href="http://tshirtbingo.com/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="http://www.tshirtbingo.com/favicon.ico" /> 
+<link rel="icon" type="image/x-icon" href="http://www.tshirtbingo.com/favicon.ico" />
 
 <title>T-Shirt Bingo</title>
 
@@ -39,7 +39,7 @@
 				<span>T-Shirt Bingo</span>
 			</td>
 			<td align="right" valign="top" class="topnav noPrint">
-				<a href="http://tshirtbingo.com/">Home</a> | <a href="http://www.tshirtbingo.com/front/easy">Get a New Card</a> | About The Game | About Us | Contact Us | <a href="http://twitter.com/tshirtbingo" target="_new">Twitter</a> | <a href="http://zazzle.com/tshirtbingo" target="_new">Store</a>
+				<a href="http://tshirtbingo.com/">Home</a> | <a href="http://www.tshirtbingo.com/front/easy">Get a New Card</a> | <a href="http://www.tshirtbingo.com/about/thegame">About The Game</a> | <a href="http://www.tshirtbingo.com/about/us">About Us</a> | <a href="http://twitter.com/tshirtbingo" target="_new">Twitter</a> | <a href="http://zazzle.com/tshirtbingo" target="_new">Store</a>
 			</td>
 		</tr>
 	</table>
