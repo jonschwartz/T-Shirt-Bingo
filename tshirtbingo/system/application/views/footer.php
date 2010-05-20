@@ -10,5 +10,8 @@ try {
 var pageTracker = _gat._getTracker("UA-15564171-1");
 pageTracker._trackPageview();
 } catch(err) {}</script>
+<script type="text/javascript" src="http://www.tshirtbingo.com/js/prototype.js"></script>
+<script type="text/javascript" src="http://www.tshirtbingo.com/js/scriptaculous.js?load=effects,builder"></script>
+<script type="text/javascript" src="http://www.tshirtbingo.com/js/lightbox.js"></script>
 </body>
 </html>
