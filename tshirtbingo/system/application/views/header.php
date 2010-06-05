@@ -20,6 +20,18 @@
 <link href="http://www.tshirtbingo.com/print.css" rel="stylesheet" type="text/css" media="print"> 
 <link rel="stylesheet" href="http://www.tshirtbingo.com/css/lightbox.css" type="text/css" media="screen" />
 
+<script src="http://www.tshirtbingo.com/js/jquery.js"></script>
+<script>
+     var $j = jQuery.noConflict();
+     
+     // Use jQuery via $j(...)
+     $j(document).ready(function(){
+       //$j("div").hide();
+     });
+     
+     // Use Prototype with $(...), etc.
+     $('someid').hide();
+   </script>
 </head>
 <?php flush(); ?>
 <body>

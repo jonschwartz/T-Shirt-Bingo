@@ -109,12 +109,12 @@ class Shirt extends Model {
 			$shirt_data .= '</td>';
 			
 			$shirt_data .= '<td>';
-			$shirt_data .= '<input type="checkbox" value = "1" name="'.$row->shirt_id.'active"';
+			$shirt_data .= '<input type="checkbox" value = "1" name="'.$row->shirt_id.'active" ';
 			if ($row->enabled == 1)
 			{
-				$shirt_data .= ' checked';
+				$shirt_data .= 'checked ';
 			}
-			$shirt_data .= '/>';
+			$shirt_data .= 'onChange ="jQuery.post(\'http://www.tshirtbingo.com/admin/shirt\', { shirtid: \''.$row->shirt_id.'\', enabled: '.$row->shirt_id.'active.value } );"/>';
 			
 			$shirt_data .= '<td>';
 			$shirt_data .= '<input type="checkbox" value = "1" name="'.$row->shirt_id.'frame"';

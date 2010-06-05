@@ -14,7 +14,7 @@ class Admin extends Controller {
 		
 		$this->load->helper(array('form', 'url'));		
 		$this->load->library('validation');
-		if ($_SERVER['REMOTE_ADDR'] == '76.118.63.23')
+		if (($_SERVER['REMOTE_ADDR'] == '76.118.63.23') or ($_SERVER['REMOTE_ADDR'] == '98.11.8.15.61'))
 		{
 		//if ($this->form_validation->run() == FALSE)
 		//{
@@ -63,6 +63,10 @@ class Admin extends Controller {
 			redirect('/front/', 'refresh');
 		}
 		
+	}
+	
+	function shirts()
+	{
 	}
 }
 ?>
