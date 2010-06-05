@@ -257,7 +257,7 @@ class Card extends Model {
 			}
 		}
 		
-		$card_data .= '</table>'."\n".'<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td>';
+		$card_data .= '</table>'."\n".'<!--<br/>'."\n".'<div class="card box_round box_shadow">'."\n".'<h3 align="left">Bonus Points</h3>'."\n".'<table cellpadding = 1>'."\n".'<tr><th></th><th>Guys</th><th>Girls</th><th></th></tr>'."\n".'<tr><td>';
 		$card_data .= '<input type="checkbox" ';
 		foreach ($check_boxes_checked as $check_box)
 		{
@@ -317,7 +317,7 @@ class Card extends Model {
 			}
 		}
 		$card_data .= ' onClick="new Ajax.Request(\'/saw/checkbox/'.$card_id.'/6\');"/>';
-		$card_data .= '</td></tr>'."\n".'</table>'."\n".'</div>';
+		$card_data .= '</td></tr>'."\n".'</table>'."\n".'</div>-->';
 		
 		return ($card_data);
 	}
