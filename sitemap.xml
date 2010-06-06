@@ -5,4 +5,14 @@
 			<changefreq>daily</changefreq>
 			<priority>0.8</priority>
 		</url>
+		<url>
+			<loc>http://www.tshirtbingo.com/about/thegame</loc>
+			<changefreq>monthly</changefreq>
+			<priority>0.8</priority>
+		</url>
+		<url>
+			<loc>http://www.tshirtbingo.com/about/us</loc>
+			<changefreq>monthly</changefreq>
+			<priority>0.8</priority>
+		</url>
 	</urlset>
