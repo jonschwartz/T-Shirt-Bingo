@@ -88,7 +88,7 @@ class Shirt extends Model {
 			}*/
 			
 			$shirt_data .= '<tr>';
-			$shirt_data .= '<td>';
+			$shirt_data .= '<td><a name="'.$row->shirt_id.'"></a>';
 			$shirt_data .= $row->shirt_id;
 			$shirt_data .= '</td>';
 
@@ -101,7 +101,7 @@ class Shirt extends Model {
 			$shirt_data .= '</td>';
 			
 			$shirt_data .= '<td>';
-			$shirt_data .= '<img src="'.$image_base_url.$row->image.'"/>';
+			$shirt_data .= '<a href="http://www.tshirtbingo.com/admin/toggle/'.$row->shirt_id.'"><img src="'.$image_base_url.$row->image.'" border=0/></a>';
 			$shirt_data .= '</td>';
 			
 			$shirt_data .= '<td>';
@@ -182,6 +182,56 @@ class Shirt extends Model {
 	
 	function toggle_active($shirt_id)
 	{
+		if ($this->get_enabled($shirt_id) == 0)
+		{
+			$this->db->where('shirt_id', $shirt_id);
+			$shirt_data['enabled'] = 1;
+			$this->db->update('shirts', $shirt_data);
+		}
+		else if ($this->get_enabled($shirt_id) == 1)
+		{
+			$this->db->where('shirt_id', $shirt_id);
+			$shirt_data['enabled'] = 0;
+			$this->db->update('shirts', $shirt_data);
+		}
+	}
+	
+	function get_tracking_cards($shirt_id)
+	{
+		$this->db->where('shirt_id', $shirt_id);
+		$query = $this->db->get('tracking');
+		foreach ($query->result() as $row)
+		{
+			return $row->card_ids;
+		}
+		return false;
+	}
+	
+	function get_tracking_clicks($shirt_id)
+	{
+		$this->db->where('shirt_id', $shirt_id);
+		$query = $this->db->get('tracking');
+		foreach ($query->result() as $row)
+		{
+			return $row->clicks;
+		}
+		return false;
+	}
+	
+	function tracking($shirt_id,$card_id)
+	{
+		$card_ids = $this->get_tracking_cards($shirt_id);
+		if ($card_ids != false)
+		{
+			$this->db->where('shirt_id', $shirt_id);
+			$card_ids .= $card_id.",";
+			$card_data['card_ids'] = $card_ids;
+			$this->db->update('tracking',$card_data);
+		}
+		else
+		{
+			$
+		}
 	}
 }
 ?>

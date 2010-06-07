@@ -65,6 +65,14 @@ class Admin extends Controller {
 		
 	}
 	
+	function toggle($shirt_id)
+	{
+		$this->load->model('shirt');
+		$this->shirt->toggle_active($shirt_id);
+		redirect('/admin#'.$shirt_id, 'refresh');
+		
+	}
+	
 	function shirts()
 	{
 	}
