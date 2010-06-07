@@ -223,14 +223,21 @@ class Shirt extends Model {
 		$card_ids = $this->get_tracking_cards($shirt_id);
 		if ($card_ids != false)
 		{
+			$clicks = $this->get_tracking_clicks($shirt_id) + 1;
 			$this->db->where('shirt_id', $shirt_id);
 			$card_ids .= $card_id.",";
-			$card_data['card_ids'] = $card_ids;
+			$tracking_data['card_ids'] = $card_ids;
+			$tracking_data['clicks'] = $clicks;
 			$this->db->update('tracking',$card_data);
 		}
 		else
 		{
-			$
+			$clicks = 1;
+			$card_ids = $card_id.",";
+			$tracking_data['shirt_id'] = $shirt_id;
+			$tracking_data['card_ids'] = $card_ids;
+			$tracking_data['clicks'] = $clicks;
+			$this->db->insert('tracking',$tracking_data);
 		}
 	}
 }

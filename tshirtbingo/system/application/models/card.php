@@ -215,8 +215,14 @@ class Card extends Model {
 						}
 					}
 					$card_data .= '">';
-					
-					$card_data .='<a href="'.$url.'" target="_new">';
+					if ($shirt_detail_row->company != "woot")
+					{
+						$card_data .='<a href="http://www.tshirtbingo.com/framer/saw/'.$shirt_id.'" target="_new">'; //.$url
+					}
+					else
+					{
+						$card_data .='<a href="http://www.tshirtbingo.com/framer/get/'.$shirt_id.'" target="_new">'; //.$url
+					}
 					
 					if ($shirt_is_checked == 1)
 					{

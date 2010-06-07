@@ -23,5 +23,16 @@ class Framer extends Controller {
 		$this->load->view('frame',$shirt_data);
 		$this->load->view('footer');
 	}
+	
+	function saw($shirt_id)
+	{
+		$card_id = get_cookie('cardid');
+		$this->load->model('shirt');
+		$url = $this->shirt->get_url($shirt_id);
+		
+		$this->shirt->tracking($shirt_id,$card_id);
+		
+		redirect($url,'refresh');
+	}
 }
 ?>
