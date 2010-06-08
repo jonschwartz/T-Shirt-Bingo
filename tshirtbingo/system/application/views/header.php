@@ -52,6 +52,10 @@
 
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
+<script type="text/javascript" charset="utf-8">
+document.getElementById( 'fdbk_tab' ).setAttribute("class", "fdbk_tab_left noPrint"); //For Most Browsers
+document.getElementById( 'fdbk_tab' ).setAttribute("className", "fdbk_tab_left noPrint");
+</script>
 <center>
 <div class="header">
 	<table width="800">
@@ -72,7 +76,7 @@
 	<table width = "800" class="printOnly">
 		<tr class="printOnly">
 			<td align="right" valign = "bottom" class="printOnly">
-				<img src="http://www.racoindustries.com/barcodegenerator/2d/barcode-image.axd?S=QRCode&BM=0.12&C=<?php echo 'http://tshirtbingo.com/front/card/'.$card_id;?>&IFMT=Jpeg&QRE=Auto&QREC=H&QRV=Auto&QZ=0.12&TM=0.12&MS=0.03" width="50" height="50" align="right"/><br/>Get back to this card: <nobr>http://www.tshirtbingo.com/front/card/<?php echo $card_id;?></nobr>
+				<img src="http://www.racoindustries.com/barcodegenerator/2d/barcode-image.axd?S=QRCode&BM=0.12&C=<?php echo 'http://tshirtbingo.com/front/card/'.$card_id;?>&IFMT=Jpeg&QRE=Auto&QREC=H&QRV=Auto&QZ=0.12&TM=0.12&MS=0.03" width="100" height="100" align="right"/><br/>Get back to this card: <nobr>http://www.tshirtbingo.com/front/card/<?php echo $card_id;?></nobr>
 			</td>
 		</tr>
 	</table>
