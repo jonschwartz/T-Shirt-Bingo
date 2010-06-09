@@ -40,7 +40,7 @@ class Getsnorgtees extends Controller {
 			{
 				$shirt_parts = explode('<a href="',$shirt);
 				$url_and_img = explode('"><img src="',$shirt_parts[1]);
-				$url = 'http://www.kqzyfj.com/click-3879724-10356324?url='.urlencode($url_and_img[0].'?ref=c');
+				$url = 'http://www.shareasale.com/r.cfm?u=429689&b=175316&m=5993&afftrack=&urllink='.urlencode($url_and_img[0].'?ref=c');
 				$image_and_title = explode('"',$url_and_img[1]);
 				$img = $image_and_title[0];
 				

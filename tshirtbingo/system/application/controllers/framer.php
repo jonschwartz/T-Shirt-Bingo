@@ -31,7 +31,7 @@ class Framer extends Controller {
 		$url = $this->shirt->get_url($shirt_id);
 		
 		$this->shirt->tracking($shirt_id,$card_id);
-		
+		$this->load->view('ga');
 		redirect($url,'refresh');
 	}
 }
