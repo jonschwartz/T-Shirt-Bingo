@@ -228,7 +228,7 @@ class Shirt extends Model {
 			$card_ids .= $card_id.",";
 			$tracking_data['card_ids'] = $card_ids;
 			$tracking_data['clicks'] = $clicks;
-			$this->db->update('tracking',$card_data);
+			$this->db->update('tracking',$tracking_data);
 		}
 		else
 		{
